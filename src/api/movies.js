@@ -1,5 +1,5 @@
 
-import axiosInst from '../utils/axios';
+import axiosInst from '../utils/axiosInst';
 
 const getMoviesByGanre = async (id) => {
 

@@ -6,13 +6,12 @@ import { genres } from '../ganres';
 const HomePage = () => {
   return (
     <div>
-        {genres.map(gen => {
+        {genres.map((gen, index) => {
            console.log( gen.id);
-         const movies = getMoviesByGanre(gen.id);
-         console.log("homepage movies ",movies);
-         return <MovieRow 
+        
+         return <MovieRow key={index}
          genreName={gen.name}
-         data={movies}/>
+         id={gen.id}/>
         })}
     </div>
   )
