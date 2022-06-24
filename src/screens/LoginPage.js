@@ -1,17 +1,16 @@
-import React, {useEffect,useState} from 'react'
+import React, {useState} from 'react'
 import './screens.css'
 const LoginPage = () => {
-  //data base for credentials and errors
+  //database for credentials and errors
   const users = [
     {
       username: "example@boopro.tech",
-      password: 123123
+      password: '123123'
     },
     
   ];
-  
   const errors = {
-    uname: "invalid username",
+    uname: "invalid username or does not exist",
     pass: "invalid password"
   };
 // States
@@ -23,7 +22,6 @@ const handleErrorMessage = (name) =>
     <div className="error">{errorMessages.message}</div>
   );
   const handleSubmit = (e) => {
-    // Prevent page reload
     e.preventDefault();
     var { uname, pass } = document.forms[0];
 
@@ -43,19 +41,30 @@ const handleErrorMessage = (name) =>
       setErrorMessages({ name: "uname", message: errors.uname });
     }
   };
+  // form 
+  const formContainer = (
+    <div className="formContainer">
+      <h1>Welcome to Boopro movie website</h1>
+      <h3>Please login to continue</h3>
+      <form className='loginForm' onSubmit={handleSubmit}>
+        <div className='inputContainer'>
+        <input type="text" name="uname" placeholder='Username or E-mail adress' required/>
+        {handleErrorMessage('uname')}
+        </div>
+        <div className='inputContainer'>
+        <input type="password" name="pass" placeholder='Password' required/>
+        {handleErrorMessage("pass")}
+        </div>
+        <div className='inputContainer'>
+        <input type="submit" value="Enter" />
+        </div>
+      </form>
+    </div>
+  )
   return (
     <div className='loginContainer'>
-      <div className="formContainer">
-        <h1>Welcome to Boopro movie website</h1>
-        <h3>Please login to continue</h3>
-        <form action="" className='loginForm' onSubmit={handleSubmit}>
-          <input type="text" name="username" placeholder='Username or E-mail adress' required/>
-          {handleErrorMessage('username')}
-          <input type="password" name="pass" placeholder='Password' required/>
-          {handleErrorMessage("pass")}
-          <input type="submit" value="Enter" />
-        </form>
-      </div>
+      
+      {isSubmitted ? <div className="formContainer">Log in succsessful</div> : formContainer}
     </div>
   )
 }

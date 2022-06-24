@@ -18,7 +18,7 @@ const HomePage = () => {
 //   fetchData()
 // },[])
   return (
-    <div>
+    <div className='homePage'>
         {genres.map((gen, index) => {
          return <MovieRow key={index}
          genreName={gen.name}
