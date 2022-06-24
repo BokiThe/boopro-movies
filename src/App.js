@@ -1,9 +1,12 @@
 import './App.css';
-
-function App() {
+import "./ganres";
+import HomePage from './screens/HomePage';
+import LoginPage from './screens/LoginPage';
+const App = () => {
+  const token = localStorage.getItem("token");
   return (
     <div className="App">
-     hello
+      {!token ? <HomePage/> : <LoginPage/>}
     </div>
   );
 }
