@@ -1,0 +1,6 @@
+.movieRow {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
