@@ -1,10 +1,9 @@
 .movieCard {
+
     margin: 1% 0;
 
 }
 
-
-
-.movieCard img.slected {
+.selected {
     border: 2px solid red;
 }

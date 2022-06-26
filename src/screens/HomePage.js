@@ -1,41 +1,84 @@
 import React,{useEffect,useState} from 'react'
 import { Row } from 'react-bootstrap';
 import MovieRow from '../components/movieRow/MovieRow';
-// import axiosInst from '../utils/axiosInst'; // for all genres
+import axiosInst from '../utils/axiosInst'; 
 import { genres } from '../ganres';
 
 const HomePage = () => {
-  const [selectGenIndex, setSelectedGenIndex] = useState(0)
-  const [slectedTitleIndex, setSelectedTitleIndex] = useState(0)
+  const [selectedGenIndex, setSelectedGenIndex] = useState(0)
+  const [selectedTitleIndex, setSelectedTitleIndex] = useState(0)
   const [popUpVisible, setPopUpVisible] = useState(false)
+  const [titles, setTitles] = useState([])
+
+  const fetchAllTitle = async () => {
+
+    const titlePromises = genres.map(genre => axiosInst.get(`/discover/movie?with_genres=${genre.id}&page=1&api_key=d38aa8716411ef7d8e9054b34a6678ac`))
+    const titles = await Promise.all(titlePromises)
+
+    setTitles(titles.map(title => title.data.results))
+    
+    // .then(data => setMoviesArr(data.data.results))
+    // .catch(err => console.log('nesto nije u redu', err));
+  }
 
   useEffect(() => {
-    console.log('selectGenIndex', selectGenIndex)
-    console.log('slectedTitleIndex', slectedTitleIndex)
-    console.log('popUpVisible', popUpVisible)
-  }, [selectGenIndex, slectedTitleIndex, popUpVisible])
+    fetchAllTitle()
+  }, [])
+
+  // useEffect(() => {
+  //   console.log('selectGenIndex', selectedGenIndex)
+  //   console.log('slectedTitleIndex', slectedTitleIndex)
+  //   console.log('popUpVisible', popUpVisible)
+
+
+  //   // if (titles.length) {
+  //   //   if (selectGenIndex < 0) setSelectedGenIndex(0)
+  //   //   if (selectGenIndex > genres.length - 2) setSelectedGenIndex(genres.length - 1)
+    
+  //   //   if (slectedTitleIndex < 0) setSelectedTitleIndex(0)
+  //   //   if (slectedTitleIndex > titles[selectGenIndex].length - 2) setSelectedTitleIndex(titles[selectGenIndex].length - 1)
+  //   // }
+
+  // }, [selectedGenIndex, slectedTitleIndex, popUpVisible])
 
   const handleKeyDown = ({ key }) => {
-    const maxGenIndex = genres.length - 1
+    const minGenIndex = 0
+    const maxGenIndex = titles.length ? titles.length - 1 : 0
+    const minTitleIndex = 0
+    const maxTitleIndex = titles[selectedGenIndex] ? titles[selectedGenIndex].length - 1 : 0
+
+    console.log('selectGenIndex', selectedGenIndex)
+    console.log('slectedTitleIndex', selectedTitleIndex)
+    console.log('popUpVisible', popUpVisible)
+
+    console.log('maxGenIndex', maxGenIndex)
+    console.log('maxTitleIndex', maxTitleIndex)
+
+    
 
     switch(key) {
       case 'ArrowUp':
-        if (selectGenIndex <= 0) return
-        else setSelectedGenIndex(curr => curr - 1)
+        if (selectedGenIndex <= minGenIndex) return
+        setSelectedGenIndex(curr => curr - 1)
+        setPopUpVisible(false)
         break;
 
       case 'ArrowDown':
-        if (selectGenIndex >= maxGenIndex) return
-        else setSelectedGenIndex(curr => curr + 1)
+        if (selectedGenIndex >= maxGenIndex) return
+        setSelectedGenIndex(curr => curr + 1)
+        setPopUpVisible(false)
         break;
 
       case 'ArrowLeft':
-        if (slectedTitleIndex <= 0) return
-        else setSelectedTitleIndex(curr => curr - 1)
+        if (selectedTitleIndex <= minTitleIndex) return
+        setSelectedTitleIndex(curr => curr - 1)
+        setPopUpVisible(false)
         break;
 
       case 'ArrowRight':
+        if (selectedTitleIndex >= maxTitleIndex) return
         setSelectedTitleIndex(curr => curr + 1)
+        setPopUpVisible(false)
         break;
 
       case 'Enter':
@@ -58,18 +101,19 @@ const HomePage = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
+  }, [titles, selectedGenIndex, selectedTitleIndex])
 
   return (
     <div className='homePage'>
+     
         {genres.map((gen, index) => (
           <MovieRow
             key={index}
-            popUpVisible={popUpVisible}
             genreName={gen.name}
-            genreId={gen.id}
-            selectedTitleIndex={selectGenIndex === index ? slectedTitleIndex : null}
-            id={index}/>
+            titles={titles[index]}
+            popUpVisible={popUpVisible}
+            selectedTitleIndex={selectedGenIndex === index ? selectedTitleIndex : null}
+          />
         ))}
  
     </div>

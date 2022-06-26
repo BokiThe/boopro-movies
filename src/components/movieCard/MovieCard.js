@@ -1,24 +1,23 @@
 import React from 'react';
 import "./movieCard.css";
 
-const MovieCard =({movie, id, isSelected, popUpVisible}) => {
+const MovieCard =({title, isSelected, popUpVisible}) => {
   return (
-    <div className='movieCard' id={id}>
+    <div className='movieCard'>
         <img
-          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt={movie.original_title}
+          src={`https://image.tmdb.org/t/p/w500/${title.poster_path}`}
+          alt={title.original_title}
           width="250rem"
           height="400rem"
           className={`${isSelected ? 'selected' : ''}`} /> 
-
           {
             isSelected && popUpVisible
               ? <div className='hidden'> 
                   <div className='popUp'>
-                  <h6>title</h6>
-                    <p>tagline</p>
-                    <p>owervju</p>
-                    <p>vote avrage</p>
+                  <h6>{title.original_title}</h6>
+                    <p>{title.tagline}</p>
+                    <p>{title.overview}</p>
+                    <p>{title.vote_average}</p>
                   </div>
                 </div>
             : null
