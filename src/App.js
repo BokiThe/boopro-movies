@@ -6,7 +6,7 @@ const App = () => {
   const token = localStorage.getItem("token");
   return (
     <div className="App">
-      {!token ? <HomePage/> : <LoginPage/>}
+      {token ? <HomePage/> : <LoginPage/>}
     </div>
   );
 }

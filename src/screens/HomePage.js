@@ -3,6 +3,7 @@ import { Row } from 'react-bootstrap';
 import MovieRow from '../components/movieRow/MovieRow';
 // import axiosInst from '../utils/axiosInst'; // for all genres
 import { genres } from '../ganres';
+
 const HomePage = () => {
   // This is the state with all genres from api !!!
 
@@ -17,12 +18,43 @@ const HomePage = () => {
 //   }
 //   fetchData()
 // },[])
+//setting the local storage default active row
+const defaultRow = localStorage.getItem('default');
+
+// states for moving through rows
+const [activeRow, setActiveRow] = useState(true);
+
+// handle movments between rows
+// const handleMovments = () => {
+//   const rows = document.querySelectorAll(".movieRow");
+//   rows.forEach((row,i,arr) => {
+//     row.addEventListener("keyDown", (e)=>{
+//       e.preventDefault();
+//      if(e.key === "ArrowUp" &&
+//      i > 0 &&
+//      i < arr.length) {
+//        row--;
+//        setActiveRow(row)
+//      }else if( e.key === "ArrowDown" &&  i < 0 &&
+//      i > arr.length ){
+//         row++;
+//         setActiveRow(row)
+//      }
+//     })
+//   })}
+useEffect(()=>{
+  setTimeout(() => {
+    const rows = document.querySelectorAll(".movieRow")
+    console.log(rows)
+  }, 1000);
+},[])  
   return (
     <div className='homePage'>
         {genres.map((gen, index) => {
          return <MovieRow key={index}
          genreName={gen.name}
-         genreId={gen.id}/>
+         genreId={gen.id}
+         id={index}/>
         })}
     </div>
   )

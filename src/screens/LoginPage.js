@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import HomePage from './HomePage';
 import './screens.css'
 const LoginPage = () => {
   //database for credentials and errors
@@ -34,6 +35,7 @@ const handleErrorMessage = (name) =>
         // Invalid password
         setErrorMessages({ name: "pass", message: errors.pass });
       } else {
+       localStorage.setItem("token",'token')
         setIsSubmitted(true);
       }
     } else {
@@ -43,29 +45,28 @@ const handleErrorMessage = (name) =>
   };
   // form 
   const formContainer = (
-    <div className="formContainer">
-      <h1>Welcome to Boopro movie website</h1>
-      <h3>Please login to continue</h3>
-      <form className='loginForm' onSubmit={handleSubmit}>
-        <div className='inputContainer'>
-        <input type="text" name="uname" placeholder='Username or E-mail adress' required/>
-        {handleErrorMessage('uname')}
-        </div>
-        <div className='inputContainer'>
-        <input type="password" name="pass" placeholder='Password' required/>
-        {handleErrorMessage("pass")}
-        </div>
-        <div className='inputContainer'>
-        <input type="submit" value="Enter" />
-        </div>
-      </form>
+    <div className='loginContainer'>
+      <div className="formContainer">
+        <h1>Welcome to Boopro movie website</h1>
+        <h3>Please login to continue</h3>
+        <form className='loginForm' onSubmit={handleSubmit}>
+          <div className='inputContainer'>
+          <input type="text" name="uname" placeholder='Username or E-mail adress' required/>
+          {handleErrorMessage('uname')}
+          </div>
+          <div className='inputContainer'>
+          <input type="password" name="pass" placeholder='Password' required/>
+          {handleErrorMessage("pass")}
+          </div>
+          <div className='inputContainer'>
+          <input type="submit" value="Enter" />
+          </div>
+        </form>
+      </div>
     </div>
   )
   return (
-    <div className='loginContainer'>
-      
-      {isSubmitted ? <div className="formContainer">Log in succsessful</div> : formContainer}
-    </div>
+      isSubmitted ? <HomePage/> : formContainer
   )
 }
 

@@ -3,4 +3,5 @@
     flex: 1;
     flex-direction: row;
     flex-wrap: nowrap;
+    text-decoration: none;
 }

@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react'
 import MovieCard from '../movieCard/MovieCard'
 import axiosInst from '../../utils/axiosInst';
 import './movieRow.css';
-const MovieRow = ({genreName,genreId}) => {
+const MovieRow = ({genreName,genreId, id}) => {
 const [moviesArr, setMoviesArr] = useState([]);
 
 useEffect(()=>{
@@ -13,14 +13,18 @@ useEffect(()=>{
   setMoviesArr(movies.data.results)
   }
   fetchData()
+  window.addEventListener("click",(e)=>{
+    e.preventDefault();
+    console.log(e.target)
+  })
 },[genreId])
 
   return (
     <div className='movieContainer'>
         <h3>{genreName}</h3>
-        <div className='movieRow'>
+        <div className='movieRow' id={id}>
             {moviesArr.map((movie, index) => {
-             return <MovieCard key={index} movie={movie}/>
+             return <MovieCard key={index} id={index} movie={movie}/>
             })}
         </div>
         
