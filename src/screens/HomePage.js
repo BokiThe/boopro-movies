@@ -5,57 +5,73 @@ import MovieRow from '../components/movieRow/MovieRow';
 import { genres } from '../ganres';
 
 const HomePage = () => {
-  // This is the state with all genres from api !!!
+  const [selectGenIndex, setSelectedGenIndex] = useState(0)
+  const [slectedTitleIndex, setSelectedTitleIndex] = useState(0)
+  const [popUpVisible, setPopUpVisible] = useState(false)
 
-//   const [ganresArr, setGanresArr] = useState([]);
+  useEffect(() => {
+    console.log('selectGenIndex', selectGenIndex)
+    console.log('slectedTitleIndex', slectedTitleIndex)
+    console.log('popUpVisible', popUpVisible)
+  }, [selectGenIndex, slectedTitleIndex, popUpVisible])
 
-// useEffect(()=>{
-//   const fetchData = async ()=> {
-//    const ganres = await axiosInst.get(`/genre/movie/list?api_key=d38aa8716411ef7d8e9054b34a6678ac&language=en-US`)
-//    .then(data => Promise.resolve(data) )
-//    .catch(err => console.log('nesto nije u redu', err));
-//   setGanresArr(ganres.data.genres)
-//   }
-//   fetchData()
-// },[])
-//setting the local storage default active row
-const defaultRow = localStorage.getItem('default');
+  const handleKeyDown = ({ key }) => {
+    const maxGenIndex = genres.length - 1
 
-// states for moving through rows
-const [activeRow, setActiveRow] = useState(true);
+    switch(key) {
+      case 'ArrowUp':
+        if (selectGenIndex <= 0) return
+        else setSelectedGenIndex(curr => curr - 1)
+        break;
 
-// handle movments between rows
-// const handleMovments = () => {
-//   const rows = document.querySelectorAll(".movieRow");
-//   rows.forEach((row,i,arr) => {
-//     row.addEventListener("keyDown", (e)=>{
-//       e.preventDefault();
-//      if(e.key === "ArrowUp" &&
-//      i > 0 &&
-//      i < arr.length) {
-//        row--;
-//        setActiveRow(row)
-//      }else if( e.key === "ArrowDown" &&  i < 0 &&
-//      i > arr.length ){
-//         row++;
-//         setActiveRow(row)
-//      }
-//     })
-//   })}
-useEffect(()=>{
-  setTimeout(() => {
-    const rows = document.querySelectorAll(".movieRow")
-    console.log(rows)
-  }, 1000);
-},[])  
+      case 'ArrowDown':
+        if (selectGenIndex >= maxGenIndex) return
+        else setSelectedGenIndex(curr => curr + 1)
+        break;
+
+      case 'ArrowLeft':
+        if (slectedTitleIndex <= 0) return
+        else setSelectedTitleIndex(curr => curr - 1)
+        break;
+
+      case 'ArrowRight':
+        setSelectedTitleIndex(curr => curr + 1)
+        break;
+
+      case 'Enter':
+        setPopUpVisible(true)
+        break;
+
+      case 'Escape':
+        setPopUpVisible(false)
+        break;
+
+      default:
+        console.log('Unrecognized key press.')
+    }
+  }
+
+  useEffect(() => {
+    console.log('Setting event listener...')
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
     <div className='homePage'>
-        {genres.map((gen, index) => {
-         return <MovieRow key={index}
-         genreName={gen.name}
-         genreId={gen.id}
-         id={index}/>
-        })}
+        {genres.map((gen, index) => (
+          <MovieRow
+            key={index}
+            popUpVisible={popUpVisible}
+            genreName={gen.name}
+            genreId={gen.id}
+            selectedTitleIndex={selectGenIndex === index ? slectedTitleIndex : null}
+            id={index}/>
+        ))}
+ 
     </div>
   )
 }

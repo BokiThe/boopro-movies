@@ -5,7 +5,6 @@
 
 
 
-.movieCard img:focus,
-.movieCard img:active {
+.movieCard img.slected {
     border: 2px solid red;
 }
