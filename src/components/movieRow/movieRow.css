@@ -5,3 +5,7 @@
     flex-wrap: nowrap;
     text-decoration: none;
 }
+
+.movieRow h1 {
+    font-size: 100em;
+}

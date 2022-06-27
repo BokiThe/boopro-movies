@@ -7,14 +7,13 @@ const MovieCard =({title, isSelected, popUpVisible}) => {
         <img
           src={`https://image.tmdb.org/t/p/w500/${title.poster_path}`}
           alt={title.original_title}
-          width="250rem"
-          height="400rem"
           className={`${isSelected ? 'selected' : ''}`} /> 
           {
             isSelected && popUpVisible
-              ? <div className='hidden'> 
+              ? <div className='popUpContainer'> 
                   <div className='popUp'>
-                  <h6>{title.original_title}</h6>
+                  <h4>{title.original_title}</h4>
+                    <hr />
                     <p>{title.tagline}</p>
                     <p>{title.overview}</p>
                     <p>{title.vote_average}</p>
