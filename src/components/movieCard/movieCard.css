@@ -13,7 +13,7 @@
 }
 
 .popUpContainer {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -32,11 +32,9 @@
 @keyframes popUp {
     from {
         opacity: 0;
-
     }
 
     to {
         opacity: 1;
-
     }
 }

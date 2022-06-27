@@ -12,7 +12,7 @@ const MovieCard =({title, isSelected, popUpVisible}) => {
             isSelected && popUpVisible
               ? <div className='popUpContainer'> 
                   <div className='popUp'>
-                  <h1>{title.original_title}</h1>
+                  <h1>{title.title}</h1>
                     <hr />
                     <h3>{title.tagline}</h3>
                     <h3><h1>Overview</h1> <br /> {title.overview}</h3>
