@@ -1,13 +1,15 @@
 .movieCard {
     margin: 1% 0;
+
 }
 
 .selected {
-    border: 2px solid red;
+    border: 3px solid red;
+    margin: -5px -7px 0px -1px
 }
 
 .movieCard img {
-    width: 16.666em;
+    width: 99%;
 }
 
 .popUpContainer {
@@ -17,12 +19,14 @@
     transform: translate(-50%, -50%);
     border: 1px solid red;
     border-radius: 8px;
-    max-width: 500px;
+    max-width: 40%;
     text-align: center;
     background-color: black;
     color: white;
     transition: all 1s ease;
     animation: popUp .3s ease-in-out;
+    padding: 20px;
+
 }
 
 @keyframes popUp {

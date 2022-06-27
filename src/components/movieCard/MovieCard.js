@@ -12,11 +12,11 @@ const MovieCard =({title, isSelected, popUpVisible}) => {
             isSelected && popUpVisible
               ? <div className='popUpContainer'> 
                   <div className='popUp'>
-                  <h4>{title.original_title}</h4>
+                  <h1>{title.original_title}</h1>
                     <hr />
-                    <p>{title.tagline}</p>
-                    <p>{title.overview}</p>
-                    <p>{title.vote_average}</p>
+                    <h3>{title.tagline}</h3>
+                    <h3><h1>Overview</h1> <br /> {title.overview}</h3>
+                    <h3>Raiting:{title.vote_average}</h3>
                   </div>
                 </div>
             : null

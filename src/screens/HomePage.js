@@ -26,7 +26,9 @@ const HomePage = () => {
     const minGenIndex = 0
     const maxGenIndex = titles.length ? titles.length - 1 : 0
     const minTitleIndex = 0
-    const maxTitleIndex = titles[selectedGenIndex] ? titles[selectedGenIndex].length - 1 : 0;
+    // const maxTitleIndex = titles[selectedGenIndex] ? titles[selectedGenIndex].length - 1 : 0;
+    const maxTitleIndex = titles[selectedGenIndex] ? 5 : 0;
+
 
     switch(key) {
       case 'ArrowUp':
