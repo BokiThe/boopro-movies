@@ -6,4 +6,9 @@
     text-decoration: none;
     overflow-y: scroll;
     scrollbar-width: none;
+
+}
+
+.movieRow::-webkit-scrollbar {
+    display: none;
 }
