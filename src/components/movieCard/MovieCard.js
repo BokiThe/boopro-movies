@@ -25,7 +25,7 @@ const MovieCard =({title, isSelected, popUpVisible}) => {
                   <h1>{title.title}</h1>
                     <hr />
                     <h3>{title.tagline}</h3>
-                    <h3><h1>Overview</h1> <br /> {title.overview}</h3>
+                    <h3>Overview <br /> {title.overview}</h3>
                     <h3>Raiting: 🌟{title.vote_average}/10</h3>
                   </div>
                 </div>

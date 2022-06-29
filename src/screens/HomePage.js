@@ -2,7 +2,6 @@ import React,{useEffect,useState} from 'react';
 import MovieRow from '../components/movieRow/MovieRow';
 import axiosInst from '../utils/axiosInst'; 
 import { genres } from '../ganres';
-import Pagination from 'react-js-pagination'
 
 
 const HomePage = () => {
@@ -11,8 +10,7 @@ const HomePage = () => {
   const [selectedTitleIndex, setSelectedTitleIndex] = useState(0)
   const [popUpVisible, setPopUpVisible] = useState(false)
   const [titles, setTitles] = useState([]);
-  const [activePage,setActivePage] = useState(1);
-  // const [scrollY, setScrollY] = useState(0);
+
 // async fetching all movies 
   const fetchAllTitle = async () => {
 
@@ -89,8 +87,6 @@ const HomePage = () => {
             popUpVisible={popUpVisible}
             selectedTitleIndex={selectedGenIndex === index ? selectedTitleIndex : null}
           />
-            
-     
         ))}
  
     </div>
