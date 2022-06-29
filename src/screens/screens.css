@@ -45,4 +45,11 @@
 /* HomePage screen */
 .homePage {
     padding: 0 1%;
+    overflow: hidden;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
 }

@@ -1,26 +1,36 @@
-import React from 'react';
+import React, {useRef,useEffect} from 'react';
 import "./movieCard.css";
 
 const MovieCard =({title, isSelected, popUpVisible}) => {
+  const cardRef = useRef(null);
+  useEffect(()=> {
+    if (isSelected && cardRef.current) {
+      cardRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+      });
+      
+    }
+  },[isSelected])
   return (
-    <div className='movieCard'>
+    <div className='movieCard' ref={cardRef}>
         <img
           src={`https://image.tmdb.org/t/p/w500/${title.poster_path}`}
           alt={title.original_title}
           className={`${isSelected ? 'selected' : ''}`} /> 
-          {
-            isSelected && popUpVisible
-              ? <div className='popUpContainer'> 
+            
+               <div className={`popUpContainer${isSelected && popUpVisible ? " visible": ""}` }> 
                   <div className='popUp'>
                   <h1>{title.title}</h1>
                     <hr />
                     <h3>{title.tagline}</h3>
                     <h3><h1>Overview</h1> <br /> {title.overview}</h3>
-                    <h3>Raiting:{title.vote_average}</h3>
+                    <h3>Raiting: 🌟{title.vote_average}/10</h3>
                   </div>
                 </div>
-            : null
-          }
+            
+         
        </div>
   )
 }
