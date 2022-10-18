@@ -53,7 +53,7 @@ const LoginPage = () => {
             <input
               type='text'
               name='uname'
-              placeholder='Username or E-mail adress (example@boopro.tech)'
+              placeholder='Username (example@boopro.tech)'
               required
             />
             {handleErrorMessage("uname")}
